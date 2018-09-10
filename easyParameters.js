@@ -1,20 +1,17 @@
 function getParameters(url=window.location.href) {
   if (checkForParameters(url) === true) {
-    url = url.slice(url.indexOf('?')+1);
-    url = url.replace(/=/g,'&');
-    url = url.split('&');
+    url = url.slice(url.indexOf('?')+1)
+             .replace(/=/g,'&')
+             .split('&');
     
     let keys = [],
         vals = [],
         parameters = {};
     
     url.forEach((el,index) => {
-      if (index % 2 === 0) {
-        keys.push(el);
-      }
-      else {
-        vals.push(el);
-      }
+      (index % 2 === 0)
+        ? keys.push(el)
+        : vals.push(el);
     });
   
     for (let i = 0; i < keys.length; i++) {
@@ -38,12 +35,9 @@ function getSingleParameter(parameter, url=window.location.href) {
       return el === parameter;
     });
 
-    if (index === -1) {
-      return Error('Parameter not found');
-    }
-    else {
-      return vals[index];
-    }
+    return (index === -1)
+      ? Error('Parameter not found')
+      : vals[index];
     
   }
   else {
@@ -52,10 +46,7 @@ function getSingleParameter(parameter, url=window.location.href) {
 }
 
 function checkForParameters(url) {
-  if (url.indexOf('?') === -1) {
-    return false;
-  }
-  else {
-    return true;
-  }
+  return (url.indexOf('?') === -1)
+    ? false
+    : true;
 }
